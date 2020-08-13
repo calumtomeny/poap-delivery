@@ -1,0 +1,25 @@
+{
+  "name": "poap-medalla-airdop",
+  "version": "1.0.0",
+  "description": "Proof of Attendance Protocol contract for airdrop of Medalla chain validator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "POAP",
+    "ethereum",
+    "medalla"
+  ],
+  "author": "Ramiro Gonzalez <ramiro@xivis.com> (https://github.com/ragonzal)",
+  "license": "MIT",
+  "devDependencies": {
+    "@nomiclabs/buidler": "^1.4.3",
+    "@nomiclabs/buidler-ethers": "^2.0.0",
+    "@nomiclabs/buidler-waffle": "^2.0.0",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "ethereum-waffle": "^3.0.2",
+    "ethers": "^5.0.8"
+  }
+}

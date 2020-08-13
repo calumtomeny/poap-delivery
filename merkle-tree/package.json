@@ -1,0 +1,14 @@
+{
+  "name": "merkle-tree",
+  "version": "1.0.0",
+  "description": "Script to generate Merkle tree leaves and root hash for POAP airdrop",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ramiro Gonzalez <ramiro@xivis.com> (https://github.com/ragonzal)",
+  "license": "MIT",
+  "dependencies": {
+    "ethers": "^5.0.8"
+  }
+}
