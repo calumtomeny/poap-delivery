@@ -31,7 +31,7 @@ solidity_flattener contracts/PoapDelegatedMint.sol --solc-paths="@openzeppelin/=
 
 ## Deployed contracts ##
  - Mainnet: [](https://etherscan.io/address/)
- - Ropsten: [](https://ropsten.etherscan.io/address/)
+ - Ropsten: [0x6ffc6bC69Ce4605ee1729D928504Cd71b08cC624](https://ropsten.etherscan.io/address/0x6ffc6bC69Ce4605ee1729D928504Cd71b08cC624)
 
 
 ## Going live ##

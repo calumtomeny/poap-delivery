@@ -1,11 +1,14 @@
 // Built by @ragonzal - 2020
-pragma solidity ^0.5.17;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.6.12;
 
-import "./Poap.sol";
+interface Poap {
+    function mintToken(uint256 eventId, address to) external returns (bool);
+}
 
 contract MedallaPoapAirdrop {
 
-    string public name = "POAP Delegated Mint";
+    string public name = "POAP Medalla Airdrop";
 
     // POAP Contract - Only Mint Token function
     Poap POAPToken;

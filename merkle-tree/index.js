@@ -9,19 +9,8 @@ class MerkleTree {
   constructor (file = './addresses.json') {
     this.pathToFile = file;
     this.receivers = JSON.parse(fs.readFileSync(this.pathToFile));
-    // console.log(this.receivers);
-    // console.log('\n');
-
     this.leaves = this.getLeaves();
-    // console.log(this.leaves);
-    // console.log('\n');
-
     this.layers = this.getLayers(this.leaves);
-    // console.log(this.layers);
-    // console.log('\n');
-
-    console.log(this.getRoot());
-    // console.log('\n');
   }
 
   hash(index, address, events) {
@@ -119,36 +108,7 @@ class MerkleTree {
     }
   }
 
-  printContractData(index) {
-    let keys = Object.keys(this.receivers);
-    console.log('Index: ', index);
-    console.log('Address: ', keys[index]);
-    console.log('Events: ', this.receivers[keys[index]]);
-    let proof = this.getProof(index);
-    let message = "";
-    for(let p of proof) {
-      if (message === '') {
-        message = `["${p}",`;
-      } else {
-        message = `${message}"${p}",`;
-      }
-    }
-    console.log('Proof')
-    console.log(`${message}]`);
-    console.log('\n');
-  }
-
 }
-
-const tree = new MerkleTree();
-tree.printContractData(0);
-tree.printContractData(1);
-tree.printContractData(5);
-tree.printContractData(6);
-tree.printContractData(10);
-tree.printContractData(15);
-tree.printContractData(16);
-
 
 module.exports = {
   MerkleTree,

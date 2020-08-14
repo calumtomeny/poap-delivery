@@ -4,7 +4,9 @@
   "description": "Proof of Attendance Protocol contract for airdrop of Medalla chain validator",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "chain": "npx buidler node",
+    "compile": "npx buidler compile",
+    "test": "npx buidler test"
   },
   "keywords": [
     "POAP",
@@ -17,6 +19,7 @@
     "@nomiclabs/buidler": "^1.4.3",
     "@nomiclabs/buidler-ethers": "^2.0.0",
     "@nomiclabs/buidler-waffle": "^2.0.0",
+    "@openzeppelin/contracts": "^3.1.0",
     "chai": "^4.2.0",
     "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.0.2",
