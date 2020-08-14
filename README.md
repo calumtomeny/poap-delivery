@@ -17,7 +17,7 @@ To distribute the badges in a quick, efficent and affordable way, the Air-Drop w
 ### ETH
 Source code of deployed contract, scripts and tests.
 
-### Frontend
+### App
 Source code of Gatsby web-app, frontend used for users to claim their POAPs.
 
 ### Merkle Tree

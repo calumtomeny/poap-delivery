@@ -1,0 +1,66 @@
+{
+  "name": "poap-medalla-airdop-web",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "",
+  "license": "MIT",
+  "author": "Ramiro Gonzalez <ramiro@xivis.com> (https://github.com/ragonzal)",
+  "scripts": {
+    "build": "gatsby build",
+    "dev": "GATSBY_HOT_LOADER=fast-refresh gatsby develop",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "aos": "^2.3.4",
+    "emotion-theming": "^10.0.27",
+    "gatsby": "^2.24.28",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
+    "react-tilt": "^0.1.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:prettier/recommended"
+    ],
+    "plugins": [],
+    "rules": {
+      "react/prop-types": 0,
+      "react/no-children-prop": 0,
+      "react/no-unknown-property": 0,
+      "prettier/prettier": "error"
+    }
+  },
+  "devDependencies": {
+    "typescript": "^3.9.7",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "gatsby-plugin-chakra-ui": "^0.1.4",
+    "gatsby-plugin-react-svg": "^3.0.0",
+    "gatsby-plugin-root-import": "^2.0.5",
+    "gatsby-plugin-web-font-loader": "^1.0.4",
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5"
+  }
+}
