@@ -1,5 +1,5 @@
 {
-  "name": "poap-medalla-airdop",
+  "name": "poap-medalla-airdop-eth",
   "version": "1.0.0",
   "description": "Proof of Attendance Protocol contract for airdrop of Medalla chain validator",
   "main": "index.js",

@@ -1,19 +1,60 @@
 // Built by @ragonzal - 2020
 pragma solidity ^0.5.17;
 
-contract MedallaPoapAirdrop {
-    bytes32 public constant _rootHash = 0xbef4d009a47a6cc9b50d45db864c757443d115f31e6568c94e17d5adec2fc840;
+import "./Poap.sol";
 
-    function initialLeaf(uint256 index, address recipient, uint256[] memory events) public pure returns (bytes32) {
-        return keccak256(abi.encodePacked(index, recipient, events));
+contract MedallaPoapAirdrop {
+
+    string public name = "POAP Delegated Mint";
+
+    // POAP Contract - Only Mint Token function
+    Poap POAPToken;
+
+    // Processed claims
+    mapping(address => bool) public claimed;
+
+    // Merkle tree root hash
+    bytes32 public rootHash;
+
+    /**
+     * @dev Contract constructor
+     * @param contractAddress Address of the POAP contrac
+     * @param merkleTreeRootHash Processed merkle tree root hash
+     */
+    constructor (address contractAddress, bytes32 merkleTreeRootHash) public {
+        POAPToken = Poap(contractAddress);
+        rootHash = merkleTreeRootHash;
     }
 
-    function verify(uint256 index, address recipient, uint256[] memory events, bytes32[] memory merkleProofs) public pure returns (bool) {
+    /**
+     * @dev Function to verify merkle tree proofs and mint POAPs to the recipient
+     * @param index Leaf position in the merkle tree
+     * @param recipient Recipient address of the POAPs to be minted
+     * @param events Array of event ids to be minted
+     * @param proofs Array of proofs to verify the claim
+     */
+    function claim(uint256 index, address recipient, uint256[] calldata events, bytes32[] calldata proofs) external {
+        require(claimed[recipient] == false, "Recipient already processed!");
+        require(verify(index, recipient, events, proofs), "Recipient not in merkle tree!");
+
+        claimed[recipient] = true;
+
+        require(mintTokens(recipient, events), "Could not mint POAPs");
+    }
+
+    /**
+     * @dev Function to verify merkle tree proofs
+     * @param index Leaf position in the merkle tree
+     * @param recipient Recipient address of the POAPs to be minted
+     * @param events Array of event ids to be minted
+     * @param proofs Array of proofs to verify the claim
+     */
+    function verify(uint256 index, address recipient, uint256[] memory events, bytes32[] memory proofs) public view returns (bool) {
 
         // Compute the merkle root
-        bytes32 node = initialLeaf(index, recipient, events);
-        for (uint16 i = 0; i < merkleProofs.length; i++) {
-            bytes32 proofElement = merkleProofs[i];
+        bytes32 node = keccak256(abi.encodePacked(index, recipient, events));
+        for (uint16 i = 0; i < proofs.length; i++) {
+            bytes32 proofElement = proofs[i];
             if (proofElement < node) {
                 node = keccak256(abi.encodePacked(proofElement, node));
             } else {
@@ -22,11 +63,19 @@ contract MedallaPoapAirdrop {
         }
 
         // Check the merkle proof
-        return node == _rootHash;
+        return node == rootHash;
     }
 
-    function testKeccak(bytes32 left, bytes32 right) public pure returns (bytes32) {
-        return  keccak256(abi.encodePacked(left, right));
+    /**
+     * @dev Function to mint POAPs
+     * @param recipient Recipient address of the POAPs to be minted
+     * @param events Array of event ids to be minted
+     */
+    function mintTokens(address recipient, uint256[] memory events) internal returns (bool) {
+        for (uint256 i = 0; i < events.length; i++) {
+            POAPToken.mintToken(events[i], recipient);
+        }
+        return true;
     }
 
 }
