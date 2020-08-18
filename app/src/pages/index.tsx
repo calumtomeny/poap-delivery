@@ -1,18 +1,18 @@
 import React from 'react';
-import { Global } from '@emotion/core';
 
 // Lib
-import { mainStyles } from 'lib/theme';
+import PageWrapper from 'lib/hoc/PageWrapper';
 
 // UI
 import MainLayout from 'ui/layouts/MainLayout';
 
 const Home = () => {
   return (
-    <MainLayout>
-      <h1> Hello Gatsby!</h1>
-      <Global styles={mainStyles} />
-    </MainLayout>
+    <PageWrapper>
+      <MainLayout>
+        <h1> Hello Gatsby!</h1>
+      </MainLayout>
+    </PageWrapper>
   );
 };
 

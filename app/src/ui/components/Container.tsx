@@ -5,7 +5,7 @@ import styled from '@emotion/styled';
 // Styled component
 const ContainerWrap = styled.div<{ theme: ITheme }>`
   width: 100%;
-  padding: 0 24px;
+  padding: 0 12px;
   @media (min-width: ${({ theme }) => theme.breakpoints['xl']}) {
     margin-right: auto;
     margin-left: auto;
