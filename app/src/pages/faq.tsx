@@ -5,12 +5,13 @@ import PageWrapper from 'lib/hoc/PageWrapper';
 
 // UI
 import MainLayout from 'ui/layouts/MainLayout';
+import FrequentlyAskedQuestions from 'ui/components/FrequentlyAskedQuestions';
 
 const Faq = () => {
   return (
     <PageWrapper>
       <MainLayout>
-        <h1> Frequently asked questions!</h1>
+        <FrequentlyAskedQuestions />
       </MainLayout>
     </PageWrapper>
   );

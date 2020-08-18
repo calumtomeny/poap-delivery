@@ -18,6 +18,7 @@ export default {
   },
   colors: {
     ...theme.colors,
+    font: '#4d5680',
     primaryColor: '#6534ff',
     secondaryColor: '#94a0d4',
     tertiaryColor: '#e98d9b',
