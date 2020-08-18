@@ -24,7 +24,11 @@ module.exports = {
       resolve: 'gatsby-plugin-web-font-loader',
       options: {
         google: {
-          families: ['Archivo', 'Archivo Narrow', 'Roboto'],
+          families: [
+            'Archivo:\ 400,500,700',
+            'Archivo Narrow:\ 400,500,700',
+            'Roboto:\ 400,500,700'
+          ],
         },
       },
     },

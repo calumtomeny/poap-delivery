@@ -12,32 +12,9 @@ const breakpoints = Object.assign(Object.values(breakpointMap), breakpointMap);
 
 export default {
   ...theme,
-  global: {
-  },
-  radii: {
-    ...theme.radii,
-  },
-  sizes: {
-    ...theme.sizes,
-  },
-  icons: {
-    ...theme.icons,
-  },
-  shadows: {
-    ...theme.shadows,
-  },
   fonts: {
     ...theme.fonts,
-    body: 'Archivo',
-  },
-  lineHeights: {
-    ...theme.lineHeights,
-  },
-  fontSizes: {
-    ...theme.fontSizes,
-  },
-  fontWeights: {
-    ...theme.fontWeights,
+    body: 'Archivo'
   },
   colors: {
     ...theme.colors,

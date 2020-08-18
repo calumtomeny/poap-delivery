@@ -12,6 +12,7 @@ import Container from 'ui/components/Container';
 const FooterWrap = styled.div<{ theme: ITheme }>`
   box-shadow: inset 0px 1px 0px #eaedf4;
   padding: 50px 0 24px;
+  background: white;
   .footer-table-row {
     display: flex;
     flex-direction: row;

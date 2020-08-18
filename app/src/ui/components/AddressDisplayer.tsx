@@ -33,7 +33,7 @@ const UserWrapper = styled.div<{ theme: ITheme }>`
       display: none;
     }
 
-    @media (max-width: ${({ theme }) => theme.breakpoints['sm']}) {
+    @media (max-width: ${({ theme }) => theme.breakpoints['md']}) {
       .full-address {
         display: none;
       }
@@ -54,6 +54,10 @@ const UserWrapper = styled.div<{ theme: ITheme }>`
     position: relative;
     width: 90px;
     flex-direction: row;
+
+    @media (max-width: ${({ theme }) => theme.breakpoints['sm']}) {
+      display: none;
+    }
 
     .badge {
       background: white;
