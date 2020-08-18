@@ -7,6 +7,7 @@ import PageWrapper from 'lib/hoc/PageWrapper';
 import MainLayout from 'ui/layouts/MainLayout';
 import Hero from 'ui/components/Hero';
 import Welcome from 'ui/components/Welcome';
+import Events from 'ui/components/Events';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
       <MainLayout>
         <Hero />
         <Welcome />
+        <Events />
       </MainLayout>
     </PageWrapper>
   );

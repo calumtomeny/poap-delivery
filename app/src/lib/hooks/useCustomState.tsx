@@ -18,15 +18,11 @@ const useCustomState = () => {
       },
     },
   };
-  const web3Modal = new Web3Modal({
-    network: 'mainnet',
-    cacheProvider: true,
-    providerOptions,
-  });
 
   // State
   const [web3, setWeb3] = useState<Web3 | null>(null);
   const [account, setAccount] = useState<string>('');
+  const [web3Modal, setWeb3Modal] = useState<any>(null);
   const [provider, setProvider] = useState<any>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
 
@@ -34,10 +30,25 @@ const useCustomState = () => {
 
   // Effects
   useEffect(() => {
+    if (!web3Modal) {
+      try {
+        setWeb3Modal(
+          new Web3Modal({
+            network: 'mainnet',
+            cacheProvider: true,
+            providerOptions,
+          }),
+        );
+      } catch (e) {
+        console.log('Error while creating Web3Modal');
+      }
+    }
+  }, []); //eslint-disable-line
+  useEffect(() => {
     if (!isConnected && web3Modal && web3Modal.cachedProvider) {
       connectWallet();
     }
-  }, [isConnected]); //eslint-disable-line
+  }, [web3Modal, isConnected]); //eslint-disable-line
 
   // Functions
   const connectWallet = async () => {

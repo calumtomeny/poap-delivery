@@ -10,6 +10,8 @@ const rootImportOptions = folderPaths.reduce(
 
 module.exports = {
   plugins: [
+    // Helmet (metadata)
+    'gatsby-plugin-react-helmet',
 
     // Chakra
     {
@@ -38,5 +40,28 @@ module.exports = {
       resolve: 'gatsby-plugin-root-import',
       options: rootImportOptions,
     },
+
+    // PWA Capabilities
+
+    /* PWA Capabilities */
+    'gatsby-plugin-offline',
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'POAP Airdrop',
+        short_name: 'POAP Airdrop',
+        start_url: '/',
+        background_color: '#fff',
+        theme_color: '#6534ff',
+        display: 'standalone',
+        icon: 'src/assets/images/POAP.png',
+      },
+    },
   ],
+  siteMetadata: {
+    author: 'POAP',
+    title: 'POAP Airdrop ✈️',
+    description: 'POAP Airdrop, a place where awesome events are recognized',
+    siteUrl: 'https://airdrop.xivis.com'
+  },
 };
