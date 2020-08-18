@@ -7,13 +7,13 @@ import { mainStyles } from 'lib/theme';
 // UI
 import MainLayout from 'ui/layouts/MainLayout';
 
-const Home = () => {
+const Faq = () => {
   return (
     <MainLayout>
-      <h1> Hello Gatsby!</h1>
+      <h1> Frequently asked questions!</h1>
       <Global styles={mainStyles} />
     </MainLayout>
   );
 };
 
-export default Home;
+export default Faq;

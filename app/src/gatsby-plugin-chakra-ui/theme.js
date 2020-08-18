@@ -28,6 +28,7 @@ export default {
   },
   fonts: {
     ...theme.fonts,
+    body: 'Archivo',
   },
   lineHeights: {
     ...theme.lineHeights,
@@ -40,6 +41,16 @@ export default {
   },
   colors: {
     ...theme.colors,
+    primaryColor: '#6534ff',
+    secondaryColor: '#94a0d4',
+    tertiaryColor: '#e98d9b',
+    gray: {
+      dark: '#CCCED9',
+      medium: '#D9D9D9',
+      light: '#F6F7FB',
+      veryLight: '#FAFBFD',
+      text: '#959DA6',
+    },
   },
   breakpoints,
 };

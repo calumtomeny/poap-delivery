@@ -4,16 +4,13 @@ import { Global } from '@emotion/core';
 // Lib
 import { mainStyles } from 'lib/theme';
 
-// UI
-import MainLayout from 'ui/layouts/MainLayout';
-
-const Home = () => {
+const FourOhFourPage = () => {
   return (
-    <MainLayout>
-      <h1> Hello Gatsby!</h1>
+    <>
+      <h1> Missing page!</h1>
       <Global styles={mainStyles} />
-    </MainLayout>
+    </>
   );
 };
 
-export default Home;
+export default FourOhFourPage;
