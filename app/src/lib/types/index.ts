@@ -19,3 +19,22 @@ export type UserPoap = {
   tokenId: string;
   owner: string;
 };
+
+export type AirdropEventData = {
+  contractAddress: string;
+  addresses: {
+    string: number[];
+  } | null;
+  eventId: number;
+  githubLink: string;
+};
+
+export type AirdropEvent = {
+  [name: string]: AirdropEventData;
+};
+
+export type Transaction = {
+  address: string;
+  hash: string;
+  status: 'passed' | 'pending' | 'failed';
+};

@@ -6,4 +6,9 @@ export const mainStyles = css`
     --main-font: 'Archivo', sans-serif;
     --alt-font: 'Archivo Narrow', sans-serif;
     --mix-font: 'Roboto', sans-serif;
+  }
+
+  a:hover {
+    text-decoration: none !important;
+  }
 `;

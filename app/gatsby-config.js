@@ -60,7 +60,7 @@ module.exports = {
   ],
   siteMetadata: {
     author: 'POAP',
-    title: 'POAP Airdrop ✈️',
+    title: 'POAP - Airdrop ✈️',
     description: 'POAP Airdrop, a place where awesome events are recognized',
     siteUrl: 'https://airdrop.xivis.com'
   },

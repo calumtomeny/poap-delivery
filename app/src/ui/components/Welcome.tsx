@@ -7,7 +7,7 @@ import Card from 'ui/components/Card';
 const Welcome: FC = () => {
   const theme = useTheme();
   return (
-    <Box m={'0 auto'} maxW={'600px'} p={'50px 0'}>
+    <Box m={'0 auto'} maxW={['90%', '90%', '600px']} p={'50px 0'}>
       <Card>
         <Box
           fontSize={theme.fontSizes['md']}

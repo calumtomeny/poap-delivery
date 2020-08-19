@@ -7,7 +7,7 @@
   "author": "Ramiro Gonzalez <ramiro@xivis.com> (https://github.com/ragonzal)",
   "scripts": {
     "build": "gatsby build",
-    "dev": "GATSBY_HOT_LOADER=fast-refresh gatsby develop",
+    "dev": "GATSBY_HOT_LOADER=fast-refresh gatsby develop -H 0.0.0.0",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean"
