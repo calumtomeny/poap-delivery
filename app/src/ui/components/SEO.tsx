@@ -25,8 +25,6 @@ const SEO: FC<SEOProps> = ({ description, title }) => {
 
   const metaDescription = description || site.siteMetadata.description;
 
-  console.log(site.siteMetadata);
-
   return (
     <Helmet
       title={title || site.siteMetadata.title}

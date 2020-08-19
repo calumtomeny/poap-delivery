@@ -16,7 +16,7 @@ const Events: FC = () => {
   const events = [
     {
       image: <Image src={yam} rounded={'full'} size={'150px'} m={'20px auto'} />,
-      name: 'Yam Heros',
+      name: 'Yam Heroes',
       description: (
         <Flex
           color={'font'}

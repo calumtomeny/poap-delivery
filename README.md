@@ -1,4 +1,4 @@
-# 🎖 POAP Medalla Chain Validators Airdrop 🎖
+# 🎖 POAP Medalla Airdrop 🎖
 
 <div align="center">
   <img src="https://img.shields.io/github/issues/poapxyz/poap-medalla-airdrop?style=for-the-badge">
@@ -9,9 +9,7 @@
 </div>
 
 ## Intro
-To celebrate the successful launch of the Eth2.0 multiclient testnet Medalla, and to encourage as much community engagement as possible, we have teamed up with our friends at [beaconcha.in](https://medalla.beaconcha.in/) and [r/ethstaker](https://www.reddit.com/r/ethstaker) to create and distribute badges that will prove via the Ethereum Blockchain that you participated in the launch of the multiclient testnet.
-
-To distribute the badges in a quick, efficent and affordable way, the Air-Drop will be done using Merkle trees and leaving the user the chance to claim them whenever they want.
+To celebrate the important events the POAP team came up with a new site to distribute badges in a quick, efficient and affordable way. By using Air-Drop and Merkle trees, users can claim their badges in a new simple way.
 
 ## Project structure
 ### ETH
@@ -22,11 +20,6 @@ Source code of Gatsby web-app, frontend used for users to claim their POAPs.
 
 ### Merkle Tree
 Contains Merkle tree script to get the root hash
-
-
-## Useful links
-- Mainnet contract: [0x...](https://etherscan.io/contract/)
-- Web App: [poap.xyz/airdrop](https://poap.xyz/airdrop)
 
 ## Inspiration
 - [@ricmoo](https://github.com/ricmoo) - https://github.com/ricmoo/ethers-airdrop
