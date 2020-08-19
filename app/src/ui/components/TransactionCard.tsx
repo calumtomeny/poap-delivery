@@ -73,7 +73,7 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
               color={'gray.text'}
               marginBottom={'10px'}
             >
-              HASH
+              TX HASH
             </Box>
             <Box textAlign={'center'} color={'primaryColor'}>
               <Link href={etherscanLinks.transaction(transaction.hash)} isExternal>

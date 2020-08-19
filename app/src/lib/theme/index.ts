@@ -11,4 +11,8 @@ export const mainStyles = css`
   a:hover {
     text-decoration: none !important;
   }
+
+  ::placeholder {
+    color: #ccced9 !important;
+  }
 `;

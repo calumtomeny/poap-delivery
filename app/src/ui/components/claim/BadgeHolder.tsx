@@ -1,15 +1,36 @@
 import React, { FC } from 'react';
 import { Flex, Heading, Box, Button, Image, Link, Icon } from '@chakra-ui/core';
 
+// Helpers
+import { etherscanLinks } from 'lib/helpers/etherscan';
+
 // Asset
 import whiteStar from 'assets/images/white-star.svg';
 
 // Types
 type BadgeHolderProps = {
+  backAction: () => void;
+  address: string;
+  ens: string;
   claimed?: boolean;
 };
 
-const BadgeHolder: FC<BadgeHolderProps> = ({ claimed = false }) => {
+const BadgeHolder: FC<BadgeHolderProps> = ({ backAction, address, ens, claimed = false }) => {
+  const shortAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
+  let receiver = (
+    <Link href={etherscanLinks.address(address)} isExternal color={'primaryColor'}>
+      {shortAddress(address)} <Icon name={'external-link'} size={'14px'} mt={'-5px'} />
+    </Link>
+  );
+
+  if (ens) {
+    receiver = (
+      <Link href={etherscanLinks.address(address)} isExternal color={'primaryColor'}>
+        {ens} ({shortAddress(address)}) <Icon name={'external-link'} size={'14px'} mt={'-5px'} />
+      </Link>
+    );
+  }
+
   return (
     <Flex h={350} flexDirection={'column'} justifyContent={'space-around'}>
       <Box
@@ -19,6 +40,7 @@ const BadgeHolder: FC<BadgeHolderProps> = ({ claimed = false }) => {
         top={'20px'}
         left={'20px'}
         fontFamily={'var(--alt-font)'}
+        onClick={backAction}
       >
         <Icon name={'chevron-left'} size={'20px'} mt={'-2px'} />
         Back
@@ -47,8 +69,8 @@ const BadgeHolder: FC<BadgeHolderProps> = ({ claimed = false }) => {
           />
         )}
         {!claimed && (
-          <Box as={'p'} fontFamily={'var(--alt-font)'} color={'secondaryColor'}>
-            This POAP hasn't been claimed. <Link href={'mailto:info@poap.xyz'}>Need help?</Link>
+          <Box as={'p'} fontFamily={'var(--alt-font)'} color={'font'} mt={'20px'}>
+            POAP will be sent to {receiver}
           </Box>
         )}
       </Box>
@@ -58,6 +80,9 @@ const BadgeHolder: FC<BadgeHolderProps> = ({ claimed = false }) => {
           <Button bg={'tertiaryColor'} color={'white'} padding={'0 40px'}>
             Claim POAP Token
           </Button>
+          <Box as={'p'} fontFamily={'var(--alt-font)'} color={'secondaryColor'} mt={'10px'}>
+            <Link href={'mailto:info@poap.xyz'}>Need help?</Link>
+          </Box>
         </Box>
       )}
 

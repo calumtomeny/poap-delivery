@@ -3,7 +3,11 @@ import { Box, Flex, Heading, Link } from '@chakra-ui/core';
 
 const YamHeaderPage = () => {
   return (
-    <Flex p={'50px 100px'} align={'center'} flexDirection={['column', 'column', 'column', 'row']}>
+    <Flex
+      p={['50px 45px', '50px 45px', '50px 45px', '50px 100px']}
+      align={'center'}
+      flexDirection={['column', 'column', 'column', 'row']}
+    >
       <Box color={'font'} fontFamily={'var(--alt-font)'} fontSize={'xl'}>
         <Heading
           as={'h1'}

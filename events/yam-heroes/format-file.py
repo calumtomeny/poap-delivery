@@ -1,6 +1,6 @@
 import json
 
-YAM_EVENT_ID = 1000
+YAM_EVENT_ID = 362
 
 def main():
     print('> Starting YAM formatting')
@@ -9,21 +9,21 @@ def main():
     with open('original.json') as json_file:
         data = json.load(json_file)
         for each in data:
-            addresses_list.append(each['address'])
-            formatted_output[each['address']] = [YAM_EVENT_ID, ]
+            addresses_list.append(each['address'].lower())
+            formatted_output[each['address'].lower()] = [YAM_EVENT_ID, ]
 
     with open('output.json', 'w') as outfile:
         json.dump(formatted_output, outfile, indent=4)
 
     print('')
-    print(f'>> Amount from original file: {len(data)}')
-    print(f'>> Amount of addresses formatted: {len(formatted_output)}')
+    print('>> Amount from original file:', len(data))
+    print('>> Amount of addresses formatted:', len(formatted_output))
     amount_validation = 'SUCCESS' if len(formatted_output) == len(data) else 'ERROR'
-    print(f'>>> Amount validation: {amount_validation}')
+    print('>>> Amount validation:', amount_validation)
     print('')
 
     duplicate_validation = 'SUCCESS' if len(formatted_output) == len(set(addresses_list)) else 'ERROR'
-    print(f'>>> Duplicate address validation: {duplicate_validation}')
+    print('>>> Duplicate address validation:', duplicate_validation)
     print('')
 
     print('> End of script')

@@ -11,6 +11,8 @@ type TransactionsProps = {
 };
 
 const Transactions: FC<TransactionsProps> = ({ transactions }) => {
+  if (!transactions || transactions.length === 0) return <div />;
+
   return (
     <Box pt={'30px'}>
       <Divider color={'gray.medium'} />
