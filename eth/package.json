@@ -6,6 +6,7 @@
   "scripts": {
     "chain": "npx buidler node",
     "compile": "npx buidler compile",
+    "deploy": "npx buidler run scripts/deploy.js",
     "test": "npx buidler test"
   },
   "keywords": [

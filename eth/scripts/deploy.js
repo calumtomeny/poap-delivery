@@ -7,8 +7,10 @@ async function main() {
   const network = getEnvVariable('NETWORK');
   const poapContractAddress = getEnvVariable('POAP_ADDRESS');
   const privateKey = getEnvVariable('PK_DEPLOYER');
+  const contractName = getEnvVariable('CONTRACT_NAME');
+  const addressFilePath = getEnvVariable('ADDRESS_FILE_PATH');
 
-  const tree = new MerkleTree('../addresses.json');
+  const tree = new MerkleTree(addressFilePath);
   const rootHash = tree.getRoot();
   console.log("Merkle tree root hash:", rootHash);
 
@@ -17,8 +19,8 @@ async function main() {
 
   console.log("Deploying the contracts with the account:", await deployer.getAddress());
 
-  const MedallaPoapAirdrop = await ethers.getContractFactory("MedallaPoapAirdrop", deployer);
-  const contract = await MedallaPoapAirdrop.deploy(poapContractAddress, rootHash);
+  const poapAirdrop = await ethers.getContractFactory("PoapAirdrop", deployer);
+  const contract = await poapAirdrop.deploy(contractName, poapContractAddress, rootHash);
   await contract.deployed();
 
   console.log("Contract address:", contract.address);

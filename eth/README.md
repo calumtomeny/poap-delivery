@@ -24,10 +24,11 @@ npx buidler run scripts/deploy.js
 ```
 
 ## Deployed contracts ##
- - Mainnet: [](https://etherscan.io/address/)
- - Ropsten: [0x6ffc6bC69Ce4605ee1729D928504Cd71b08cC624](https://ropsten.etherscan.io/address/0x6ffc6bC69Ce4605ee1729D928504Cd71b08cC624)
+### YAM Heroes ###
+ - Mainnet: [0x4ed27580F2B93A3EFD37F8Dcf7dbA28e117C362C](https://etherscan.io/address/0x4ed27580F2B93A3EFD37F8Dcf7dbA28e117C362C)
+ - Ropsten: [0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC](https://ropsten.etherscan.io/address/0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC)
 
 
 ## Going live ##
 Before going live, it's necessary to:
-- [] Add the deployed address contract as a POAP event minter
+- [x] Add the deployed address contract as a POAP event minter

@@ -6,9 +6,9 @@ interface Poap {
     function mintToken(uint256 eventId, address to) external returns (bool);
 }
 
-contract MedallaPoapAirdrop {
+contract PoapAirdrop {
 
-    string public name = "POAP Medalla Airdrop";
+    string public name;
 
     // POAP Contract - Only Mint Token function
     Poap POAPToken;
@@ -21,10 +21,12 @@ contract MedallaPoapAirdrop {
 
     /**
      * @dev Contract constructor
-     * @param contractAddress Address of the POAP contrac
+     * @param contractName Contract name
+     * @param contractAddress Address of the POAP contract
      * @param merkleTreeRootHash Processed merkle tree root hash
      */
-    constructor (address contractAddress, bytes32 merkleTreeRootHash) public {
+    constructor (string memory contractName, address contractAddress, bytes32 merkleTreeRootHash) public {
+        name = contractName;
         POAPToken = Poap(contractAddress);
         rootHash = merkleTreeRootHash;
     }
