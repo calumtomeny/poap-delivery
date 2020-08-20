@@ -6,9 +6,9 @@ import yamHeroes from 'lib/events/yam';
 
 const events: AirdropEvent = {
   yam: {
-    contractAddress: '0x4ed27580F2B93A3EFD37F8Dcf7dbA28e117C362C',
+    contractAddress: process.env.GATSBY_YAM_AIRDROP_CONTRACT || '',
     addresses: yamHeroes,
-    eventId: 362,
+    eventIds: process.env.GATSBY_YAM_EVENT_IDS.split(',').map((i) => parseInt(i, 10)),
     githubLink: 'https://github.com/poapxyz',
   },
 };

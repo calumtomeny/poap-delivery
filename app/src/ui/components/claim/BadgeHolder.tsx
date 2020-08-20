@@ -8,14 +8,24 @@ import { etherscanLinks } from 'lib/helpers/etherscan';
 import whiteStar from 'assets/images/white-star.svg';
 
 // Types
+import { PoapEvent } from 'lib/types';
 type BadgeHolderProps = {
   backAction: () => void;
   address: string;
   ens: string;
+  claims: number[];
   claimed?: boolean;
+  poaps: PoapEvent[];
 };
 
-const BadgeHolder: FC<BadgeHolderProps> = ({ backAction, address, ens, claimed = false }) => {
+const BadgeHolder: FC<BadgeHolderProps> = ({
+  backAction,
+  address,
+  ens,
+  claims,
+  poaps,
+  claimed = false,
+}) => {
   const shortAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
   let receiver = (
     <Link href={etherscanLinks.address(address)} isExternal color={'primaryColor'}>
@@ -45,38 +55,51 @@ const BadgeHolder: FC<BadgeHolderProps> = ({ backAction, address, ens, claimed =
         <Icon name={'chevron-left'} size={'20px'} mt={'-2px'} />
         Back
       </Box>
-      <Heading as={'h3'} fontFamily={'var(--alt-font)'} color={'primaryColor'} textAlign={'center'}>
-        Yam Heroes
-      </Heading>
-      <Box textAlign={'center'} m={'0 auto'} position={'relative'}>
-        <Image
-          src={'https://www.poap.xyz/events/badges/devcon5.png'}
-          rounded={'full'}
-          size={'100px'}
-          m={'10px auto'}
-          boxShadow={'0 4px 14px 0 rgba(101,52,255,.5)'}
-        />
-        {claimed && (
-          <Image
-            src={whiteStar}
-            rounded={'full'}
-            bg={'tertiaryColor'}
-            position={'absolute'}
-            bottom={'0'}
-            right={'5px'}
-            size={'35px'}
-            p={'5px'}
-          />
-        )}
-        {!claimed && (
-          <Box as={'p'} fontFamily={'var(--alt-font)'} color={'font'} mt={'20px'}>
-            POAP will be sent to {receiver}
-          </Box>
-        )}
-      </Box>
+      <Flex
+        flexDirection={'row'}
+        textAlign={'center'}
+        mt={'30px'}
+        w={'100%'}
+        justifyContent={'space-around'}
+      >
+        {poaps.map((poap) => {
+          const toBeClaimed = claims.indexOf(poap.id) > -1;
+          return (
+            <Box
+              key={poap.id}
+              textAlign={'center'}
+              position={'relative'}
+              opacity={toBeClaimed ? 1 : 0.3}
+            >
+              <Image
+                src={poap.image_url}
+                rounded={'full'}
+                size={'100px'}
+                m={'10px auto'}
+                boxShadow={'0 4px 14px 0 rgba(101,52,255,.5)'}
+              />
+              {claimed && toBeClaimed && (
+                <Image
+                  src={whiteStar}
+                  rounded={'full'}
+                  bg={'tertiaryColor'}
+                  position={'absolute'}
+                  bottom={'0'}
+                  right={'5px'}
+                  size={'35px'}
+                  p={'5px'}
+                />
+              )}
+            </Box>
+          );
+        })}
+      </Flex>
 
       {!claimed && (
         <Box textAlign={'center'}>
+          <Box as={'p'} fontFamily={'var(--alt-font)'} color={'font'} m={'20px 0 10px'}>
+            POAP will be sent to {receiver}
+          </Box>
           <Button bg={'tertiaryColor'} color={'white'} padding={'0 40px'}>
             Claim POAP Token
           </Button>

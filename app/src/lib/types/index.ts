@@ -25,7 +25,7 @@ export type AirdropEventData = {
   addresses: {
     string: number[];
   } | null;
-  eventId: number;
+  eventIds: number[];
   githubLink: string;
 };
 
