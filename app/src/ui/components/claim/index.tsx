@@ -32,8 +32,6 @@ type ClaimProps = {
 };
 
 const Claim: FC<ClaimProps> = ({ event }) => {
-  const tree = new MerkleTree(event.addresses);
-
   const { account, web3, isConnected, connectWallet } = useStateContext();
   // Query hooks
   const { data: events } = useEvents();
@@ -118,6 +116,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   };
 
   const handleClaimSubmit = async () => {
+    const tree = new MerkleTree(event.addresses);
     if (!airdropContract) return;
 
     let _account = account;
