@@ -6,6 +6,7 @@ import yamHeroes from 'lib/events/yam';
 
 const events: AirdropEvent = {
   yam: {
+    key: 'yam-heroes',
     contractAddress: process.env.GATSBY_YAM_AIRDROP_CONTRACT || '',
     addresses: yamHeroes,
     eventIds: process.env.GATSBY_YAM_EVENT_IDS

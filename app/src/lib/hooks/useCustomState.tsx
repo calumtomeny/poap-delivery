@@ -8,7 +8,15 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 // Hooks
 import { usePoaps } from 'lib/hooks/usePoaps';
 
+// Types
+import { Transaction } from 'lib/types';
+
+// Helpers
+import { safeGetItem } from 'lib/helpers/localStorage';
+
 const useCustomState = () => {
+  let _transactions = safeGetItem('transactions', '[]');
+
   // Web3Modal
   const providerOptions = {
     walletconnect: {
@@ -25,6 +33,7 @@ const useCustomState = () => {
   const [web3Modal, setWeb3Modal] = useState<any>(null);
   const [provider, setProvider] = useState<any>(null);
   const [isConnected, setIsConnected] = useState<boolean>(false);
+  const [transactions, setTransactions] = useState<Transaction[]>(_transactions);
 
   const { data: poaps, isLoading: isFetchingPoaps } = usePoaps({ account });
 
@@ -90,6 +99,15 @@ const useCustomState = () => {
     setAccount('');
   };
 
+  const saveTransaction = (tx: Transaction) => {
+    let _transactions = safeGetItem('transactions', '[]');
+    if (_transactions.filter((each) => each.hash === tx.hash).length === 0) {
+      _transactions.push(tx);
+      localStorage.setItem('transactions', JSON.stringify(_transactions));
+      setTransactions(_transactions);
+    }
+  };
+
   return {
     web3,
     connectWallet,
@@ -99,6 +117,8 @@ const useCustomState = () => {
     poaps,
     provider,
     isFetchingPoaps,
+    transactions,
+    saveTransaction,
   };
 };
 

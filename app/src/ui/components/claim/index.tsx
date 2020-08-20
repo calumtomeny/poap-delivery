@@ -32,7 +32,14 @@ type ClaimProps = {
 };
 
 const Claim: FC<ClaimProps> = ({ event }) => {
-  const { account, web3, isConnected, connectWallet } = useStateContext();
+  const {
+    account,
+    web3,
+    isConnected,
+    connectWallet,
+    saveTransaction,
+    transactions,
+  } = useStateContext();
   // Query hooks
   const { data: events } = useEvents();
 
@@ -49,7 +56,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   const [claiming, setClaiming] = useState<boolean>(false);
   const [claimed, setClaimed] = useState<boolean>(false);
 
-  const transactions: Transaction[] = [];
+  const [eventTransactions, setEventTransactions] = useState<Transaction[]>([]);
 
   const handleInputChange = (value: string) => {
     setAddress(value);
@@ -113,6 +120,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
     setError('');
     setAddressClaims([]);
     setAddressValidated(false);
+    setClaiming(false);
   };
 
   const handleClaimSubmit = async () => {
@@ -134,10 +142,21 @@ const Claim: FC<ClaimProps> = ({ event }) => {
     setClaiming(true);
 
     try {
-      const tx = await airdropContract.methods.claim(index, address, addressClaims, proofs).send({
-        from: _account,
-      });
-      console.log(tx);
+      airdropContract.methods
+        .claim(index, address, addressClaims, proofs)
+        .send({
+          from: _account,
+        })
+        .on('transactionHash', (hash) => {
+          console.log(hash);
+          let tx: Transaction = {
+            key: event.key,
+            address: _account,
+            hash: hash,
+            status: 'pending',
+          };
+          saveTransaction(tx);
+        });
     } catch (e) {
       console.log(e);
       console.log('Error submitting transaction');
@@ -178,6 +197,10 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       }
     }
   }, [web3]); //eslint-disable-line
+  useEffect(() => {
+    let filteredTransactions = transactions.filter((tx) => tx.key === event.key);
+    setEventTransactions(filteredTransactions);
+  }, [transactions]); //eslint-disable-line
 
   if (!events) {
     return (
@@ -218,7 +241,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
           />
         </CardWithBadges>
       )}
-      <Transactions transactions={transactions} />
+      <Transactions transactions={eventTransactions} />
     </Box>
   );
 };

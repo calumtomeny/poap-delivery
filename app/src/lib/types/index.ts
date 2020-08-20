@@ -25,6 +25,7 @@ export type AddressData = {
 };
 
 export type AirdropEventData = {
+  key: string;
   contractAddress: string;
   addresses: AddressData | null;
   eventIds: number[];
@@ -36,6 +37,7 @@ export type AirdropEvent = {
 };
 
 export type Transaction = {
+  key: string;
   address: string;
   hash: string;
   status: 'passed' | 'pending' | 'failed';
