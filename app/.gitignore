@@ -33,7 +33,8 @@ bower_components
 build/Release
 
 node_modules/
-.env*
+.env.development
+.env.production
 .cache/
 public
 yarn-error.log

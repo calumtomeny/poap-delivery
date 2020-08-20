@@ -118,6 +118,7 @@ const Header = () => {
       left={0}
       height={[60, 60, 60, 60, 80]}
       shadow={'0px 4px 20px rgba(101, 52, 255, 0.2)'}
+      zIndex={15}
     >
       <Container>
         <Flex justify="space-between" align="center">
@@ -156,12 +157,12 @@ const Header = () => {
               <>
                 <Popover>
                   <PopoverTrigger>
-                    <div>
+                    <PseudoBox>
                       <AddressDisplayer />
-                    </div>
+                    </PseudoBox>
                   </PopoverTrigger>
                   <PopoverContent
-                    zIndex={4}
+                    position={'relative'}
                     border={'none'}
                     _focus={{
                       outline: 0,

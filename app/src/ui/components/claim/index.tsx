@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import Web3 from 'web3';
 import { utils, getDefaultProvider } from 'ethers';
 import { BaseProvider } from '@ethersproject/providers/lib';
 import { Box, Spinner } from '@chakra-ui/core';
@@ -89,13 +90,18 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       return;
     }
 
-    if (!airdropContract) {
+    let _contract = airdropContract;
+    if (!web3) {
+      const _web3 = new Web3(Web3.givenProvider || process.env.GATSY_DEFAULT_PROVIDER);
+      _contract = new _web3.eth.Contract(abi, event.contractAddress);
+      setAirdropContract(_contract);
+    } else if (!airdropContract) {
       setError('Error initiating contract');
       setValidatingAddress(false);
       return;
     }
 
-    const _claimed = await airdropContract.methods.claimed(_address).call();
+    const _claimed = await _contract.methods.claimed(_address).call();
 
     setValidatingAddress(false);
     setAddressValidated(true);

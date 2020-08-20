@@ -15,4 +15,10 @@ export const mainStyles = css`
   ::placeholder {
     color: #ccced9 !important;
   }
+
+  /* Web3 Modal Hack*/
+  #WEB3_CONNECT_MODAL_ID {
+    position: relative;
+    z-index: 50;
+  }
 `;
