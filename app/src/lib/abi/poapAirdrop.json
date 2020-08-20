@@ -1,8 +1,11 @@
-{
-  "contractName": "PoapAirdrop",
-  "abi": [
+[
     {
       "inputs": [
+        {
+          "internalType": "string",
+          "name": "contractName",
+          "type": "string"
+        },
         {
           "internalType": "address",
           "name": "contractAddress",
@@ -125,4 +128,3 @@
       "type": "function"
     }
   ]
-}

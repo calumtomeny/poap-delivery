@@ -20,11 +20,13 @@ export type UserPoap = {
   owner: string;
 };
 
+export type AddressData = {
+  string: number[];
+};
+
 export type AirdropEventData = {
   contractAddress: string;
-  addresses: {
-    string: number[];
-  } | null;
+  addresses: AddressData | null;
   eventIds: number[];
   githubLink: string;
 };

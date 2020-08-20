@@ -1,43 +1,59 @@
-'use strict';
+import ethers from 'ethers';
 
-const fs = require('fs');
-const ethers = require('ethers');
-
-
+// Type
+import { AddressData } from 'lib/types';
+type LeafProps = {
+  index: number;
+  address: string;
+  events: number[];
+};
 
 class MerkleTree {
-  constructor (file = './addresses.json') {
-    this.pathToFile = file;
-    this.receivers = JSON.parse(fs.readFileSync(this.pathToFile));
+  receivers: AddressData;
+  leaves: string[];
+  layers: string[][];
+
+  constructor(addresses: AddressData) {
+    this.receivers = addresses;
     this.leaves = this.getLeaves();
     this.layers = this.getLayers(this.leaves);
   }
 
-  hash(index, address, events) {
-    return ethers.utils.solidityKeccak256(["uint256", "address", "uint256[]"], [index, address, events]);
+  hash(index: number, address: string, events: number[]): string {
+    return ethers.utils.solidityKeccak256(
+      ['uint256', 'address', 'uint256[]'],
+      [index, address, events],
+    );
   }
 
-  expandLeaves() {
+  expandLeaves(): LeafProps[] {
     let addresses = Object.keys(this.receivers);
-    addresses.sort(function(a, b) {
-      let al = a.toLowerCase(), bl = b.toLowerCase();
-      if (al < bl) { return -1; }
-      if (al > bl) { return 1; }
+    addresses.sort(function (a, b) {
+      let al = a.toLowerCase(),
+        bl = b.toLowerCase();
+      if (al < bl) {
+        return -1;
+      }
+      if (al > bl) {
+        return 1;
+      }
       return 0;
     });
 
-    return addresses.map((a, i) => { return { address: a, events: this.receivers[a], index: i }; });
+    return addresses.map((a, i) => {
+      return { address: a, events: this.receivers[a], index: i };
+    });
   }
 
-  getLeaves() {
+  getLeaves(): string[] {
     let leaves = this.expandLeaves();
     let _hash = this.hash;
-    return leaves.map(function(leaf) {
+    return leaves.map(function (leaf) {
       return _hash(leaf.index, leaf.address, leaf.events);
     });
   }
 
-  getLayers (elements) {
+  getLayers(elements): string[][] {
     if (elements.length === 0) {
       return [['']];
     }
@@ -58,7 +74,7 @@ class MerkleTree {
     return layers;
   }
 
-  getNextLayer(leaves) {
+  getNextLayer(leaves): string[] {
     let layer = [];
     let elements = [...leaves];
     while (elements.length) {
@@ -66,22 +82,20 @@ class MerkleTree {
       if (elements.length > 0) {
         let right = elements.shift();
         let params = left < right ? [left, right] : [right, left];
-        layer.push(ethers.utils.solidityKeccak256(["bytes32", "bytes32"], params));
-        // console.log('left: ', left, ' - right: ', right)
+        layer.push(ethers.utils.solidityKeccak256(['bytes32', 'bytes32'], params));
       } else {
         layer.push(left);
-        // console.log('left: ', left)
       }
     }
     return layer;
   }
 
-  getRoot() {
+  getRoot(): string {
     return this.layers[this.layers.length - 1][0];
   }
 
-  getProof(index) {
-    if (index > this.receivers.length - 1) {
+  getProof(index): string[] {
+    if (index > Object.keys(this.receivers).length - 1) {
       throw new Error('Element does not exist in Merkle tree');
     }
 
@@ -98,7 +112,7 @@ class MerkleTree {
     }, []);
   }
 
-  getPairElement (idx, layer) {
+  getPairElement(idx, layer): string | null {
     const pairIdx = idx % 2 === 0 ? idx + 1 : idx - 1;
 
     if (pairIdx < layer.length) {
@@ -107,9 +121,6 @@ class MerkleTree {
       return null;
     }
   }
-
 }
 
-module.exports = {
-  MerkleTree,
-};
+export default MerkleTree;

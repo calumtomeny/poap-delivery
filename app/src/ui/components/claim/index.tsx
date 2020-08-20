@@ -1,7 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import { utils, getDefaultProvider } from 'ethers';
 import { BaseProvider } from '@ethersproject/providers/lib';
-import { Flex, Box, Spinner } from '@chakra-ui/core';
+import { Box, Spinner } from '@chakra-ui/core';
+import { Contract } from 'web3-eth-contract/types';
 
 // Types
 import { AirdropEventData } from 'lib/types';
@@ -17,6 +18,12 @@ import Transactions from './Transactions';
 
 import CardWithBadges from 'ui/components/CardWithBadges';
 
+// ABI
+import abi from 'lib/abi/poapAirdrop.json';
+
+// Merkle Tree
+import MerkleTree from 'lib/helpers/merkleTree';
+
 // Types
 import { Transaction, PoapEvent } from 'lib/types';
 type ClaimProps = {
@@ -24,7 +31,9 @@ type ClaimProps = {
 };
 
 const Claim: FC<ClaimProps> = ({ event }) => {
-  const { account } = useStateContext();
+  const tree = new MerkleTree(event.addresses);
+
+  const { account, web3, isConnected, connectWallet } = useStateContext();
   // Query hooks
   const { data: events } = useEvents();
 
@@ -36,12 +45,18 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   const [addressValidated, setAddressValidated] = useState<boolean>(false);
   const [validatingAddress, setValidatingAddress] = useState<boolean>(false);
   const [addressClaims, setAddressClaims] = useState<number[]>([]);
+
+  const [airdropContract, setAirdropContract] = useState<Contract | null>(null);
+  const [claiming, setClaiming] = useState<boolean>(false);
+  const [claimed, setClaimed] = useState<boolean>(false);
+
   const transactions: Transaction[] = [];
 
   const handleInputChange = (value: string) => {
     setAddress(value);
   };
   const handleSubmit = async () => {
+    let _address = '';
     setEns('');
     setValidatingAddress(true);
 
@@ -61,8 +76,10 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       }
       setEns(address);
       setAddress(resolvedAddress);
+      _address = resolvedAddress;
     } else {
-      setAddress(utils.getAddress(address));
+      _address = utils.getAddress(address);
+      setAddress(_address);
     }
 
     // Check if is in event list
@@ -72,9 +89,18 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       return;
     }
 
+    if (!airdropContract) {
+      setError('Error initiating contract');
+      setValidatingAddress(false);
+      return;
+    }
+
+    const _claimed = await airdropContract.methods.claimed(_address).call();
+
     setValidatingAddress(false);
     setAddressValidated(true);
     setAddressClaims(event.addresses[address.toLowerCase()]);
+    setClaimed(_claimed);
   };
 
   const clearForm = () => {
@@ -83,6 +109,35 @@ const Claim: FC<ClaimProps> = ({ event }) => {
     setError('');
     setAddressClaims([]);
     setAddressValidated(false);
+  };
+
+  const handleClaimSubmit = async () => {
+    if (!airdropContract) return;
+
+    let _account = account;
+
+    if (!isConnected) {
+      _account = await connectWallet();
+    }
+
+    let leaves = tree.expandLeaves();
+    let leaf = leaves.find((leaf) => leaf.address === address.toLowerCase());
+    if (!leaf) return;
+    let index = leaf.index;
+    let proofs = tree.getProof(index);
+
+    setClaiming(true);
+
+    try {
+      const tx = await airdropContract.methods.claim(index, address, addressClaims, proofs).send({
+        from: _account,
+      });
+      console.log(tx);
+    } catch (e) {
+      console.log(e);
+      console.log('Error submitting transaction');
+      setClaiming(false);
+    }
   };
 
   // Effects
@@ -100,7 +155,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
     }
   }, []); //eslint-disable-line
   useEffect(() => {
-    if (account) setAddress(account);
+    if (account && address === '') setAddress(account);
   }, [account]); //eslint-disable-line
   useEffect(() => {
     if (events) {
@@ -108,6 +163,16 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       setPoapsToClaim(_poapsToClaim);
     }
   }, [events]); //eslint-disable-line
+  useEffect(() => {
+    if (web3) {
+      try {
+        const contract = new web3.eth.Contract(abi, event.contractAddress);
+        setAirdropContract(contract);
+      } catch (e) {
+        console.log('Error initiating contract');
+      }
+    }
+  }, [web3]); //eslint-disable-line
 
   if (!events) {
     return (
@@ -142,6 +207,9 @@ const Claim: FC<ClaimProps> = ({ event }) => {
             address={address}
             claims={addressClaims}
             poaps={poapsToClaim}
+            claimed={claimed}
+            submitAction={handleClaimSubmit}
+            buttonDisabled={claiming}
           />
         </CardWithBadges>
       )}

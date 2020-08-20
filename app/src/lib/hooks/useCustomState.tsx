@@ -51,7 +51,7 @@ const useCustomState = () => {
   }, [web3Modal, isConnected]); //eslint-disable-line
 
   // Functions
-  const connectWallet = async () => {
+  const connectWallet = async (): string => {
     try {
       const _provider = await web3Modal.connect();
       const _web3: Web3 = new Web3(_provider);
@@ -69,10 +69,12 @@ const useCustomState = () => {
         _account = _provider.accounts[0];
         setAccount(_account);
       }
+      return _account;
     } catch (e) {
       console.log('Error > Connecting wallet');
       console.log(e);
     }
+    return '';
   };
   const disconnectWallet = () => {
     try {

@@ -50,7 +50,7 @@ const AddressForm: FC<AddressFormProps> = ({
             }}
           />
           <Box as={'p'} color={'red.500'} fontWeight={'bold'}>
-            {error}
+            &nbsp;{error}&nbsp;
           </Box>
         </Box>
         <Box textAlign={'center'}>

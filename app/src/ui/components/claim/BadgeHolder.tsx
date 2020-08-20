@@ -11,22 +11,28 @@ import whiteStar from 'assets/images/white-star.svg';
 import { PoapEvent } from 'lib/types';
 type BadgeHolderProps = {
   backAction: () => void;
+  submitAction: () => void;
   address: string;
   ens: string;
   claims: number[];
-  claimed?: boolean;
+  claimed: boolean;
   poaps: PoapEvent[];
+  buttonDisabled: boolean;
 };
 
 const BadgeHolder: FC<BadgeHolderProps> = ({
   backAction,
+  submitAction,
+  buttonDisabled,
   address,
   ens,
   claims,
   poaps,
-  claimed = false,
+  claimed,
 }) => {
   const shortAddress = (address: string) => `${address.slice(0, 6)}...${address.slice(-4)}`;
+  const handleSubmit = () => submitAction();
+
   let receiver = (
     <Link href={etherscanLinks.address(address)} isExternal color={'primaryColor'}>
       {shortAddress(address)} <Icon name={'external-link'} size={'14px'} mt={'-5px'} />
@@ -100,7 +106,13 @@ const BadgeHolder: FC<BadgeHolderProps> = ({
           <Box as={'p'} fontFamily={'var(--alt-font)'} color={'font'} m={'20px 0 10px'}>
             POAP will be sent to {receiver}
           </Box>
-          <Button bg={'tertiaryColor'} color={'white'} padding={'0 40px'}>
+          <Button
+            bg={'tertiaryColor'}
+            color={'white'}
+            padding={'0 40px'}
+            onClick={handleSubmit}
+            disabled={buttonDisabled}
+          >
             Claim POAP Token
           </Button>
           <Box as={'p'} fontFamily={'var(--alt-font)'} color={'secondaryColor'} mt={'10px'}>
