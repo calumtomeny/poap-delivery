@@ -1,8 +1,8 @@
-# 🎖 POAP Medalla Airdrop 🎖
+# 🎖 POAP Airdrop 🎖
 
 <div align="center">
-  <img src="https://img.shields.io/github/issues/poapxyz/poap-medalla-airdrop?style=for-the-badge">
-  <img src="https://img.shields.io/github/issues-pr/poapxyz/poap-medalla-airdrop?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues/poapxyz/poap-airdrop?style=for-the-badge">
+  <img src="https://img.shields.io/github/issues-pr/poapxyz/poap-airdrop?style=for-the-badge">
   <a href="https://t.me/poapxyz">
     <img src="https://img.shields.io/badge/Telegram-POAP-blue?style=for-the-badge&logo=telegram&message=Telegram&color=blue" alt="Chat on Telegram">
   </a>

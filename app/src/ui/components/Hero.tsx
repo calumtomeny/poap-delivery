@@ -3,10 +3,18 @@ import styled from '@emotion/styled';
 import { useTheme, ITheme, Box, Icon } from '@chakra-ui/core';
 
 // Assets
-import Berlin from 'assets/images/cities/berlin.jpg';
-import Gibraltar from 'assets/images/cities/gibraltar.jpg';
-import London from 'assets/images/cities/london.jpg';
-import Pittsburg from 'assets/images/cities/pittsburg.jpg';
+import Berlin from 'assets/images/cities/berlin.png';
+import BuenosAires from 'assets/images/cities/buenosaires.png';
+import SanFrancisco from 'assets/images/cities/francisco.png';
+import Gibraltar from 'assets/images/cities/gibraltar.png';
+import London from 'assets/images/cities/london.png';
+import Moscow from 'assets/images/cities/moscow.png';
+import Paris from 'assets/images/cities/paris.png';
+import Pittsburg from 'assets/images/cities/pittsburg.png';
+import Rio from 'assets/images/cities/rio.png';
+import Shangai from 'assets/images/cities/shangai.png';
+import Sydney from 'assets/images/cities/sydney.png';
+import Toronto from 'assets/images/cities/toronto.png';
 
 // Styled component
 const Background = styled.img<{ theme: ITheme }>`
@@ -50,9 +58,17 @@ const IconHolder = styled.div`
 const Hero: FC = () => {
   const backgrounds = [
     { image: Berlin, className: 'berlin' },
+    { image: BuenosAires, className: 'buenos-aires' },
+    { image: SanFrancisco, className: 'san-fran' },
     { image: Gibraltar, className: 'gibraltar' },
     { image: London, className: 'london' },
+    { image: Moscow, className: 'london' },
+    { image: Paris, className: 'london' },
     { image: Pittsburg, className: 'pittsburg' },
+    { image: Rio, className: 'rio' },
+    { image: Shangai, className: 'shangai' },
+    { image: Sydney, className: 'sydney' },
+    { image: Toronto, className: 'toronto' },
   ];
   const background = backgrounds[Math.floor(Math.random() * backgrounds.length)];
   const theme = useTheme();

@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { utils, getDefaultProvider } from 'ethers';
+import { BaseProvider } from '@ethersproject/providers/lib';
 import { Box } from '@chakra-ui/core';
 
 // Types
@@ -24,6 +25,7 @@ type ClaimProps = {
 const Claim: FC<ClaimProps> = ({ event }) => {
   const { account } = useStateContext();
 
+  const [provider, setProvider] = useState<BaseProvider | null>(null);
   const [address, setAddress] = useState<string>(account);
   const [ens, setEns] = useState<string>('');
   const [error, setError] = useState<string>('');
@@ -31,17 +33,18 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   const [validatingAddress, setValidatingAddress] = useState<boolean>(false);
   const transactions: Transaction[] = [];
 
-  const provider = getDefaultProvider(process.env.GATSBY_ETHEREUM_NETWORK, {
-    etherscan: process.env.GATSBY_ETHERSCAN_KEY,
-    infura: process.env.GATSBY_INFURA_KEY,
-  });
-
   const handleInputChange = (value: string) => {
     setAddress(value);
   };
   const handleSubmit = async () => {
     setEns('');
     setValidatingAddress(true);
+
+    if (!provider) {
+      setError('No connection to the Ethereum network');
+      setValidatingAddress(false);
+      return;
+    }
 
     // Check if is valid address
     if (!utils.isAddress(address)) {
@@ -76,6 +79,19 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   };
 
   // Effects
+  useEffect(() => {
+    if (!provider) {
+      try {
+        let _provider = getDefaultProvider(process.env.GATSBY_ETHEREUM_NETWORK, {
+          etherscan: process.env.GATSBY_ETHERSCAN_KEY,
+          infura: process.env.GATSBY_INFURA_KEY,
+        });
+        setProvider(_provider);
+      } catch (e) {
+        console.log('Error while initiating provider');
+      }
+    }
+  }, []); //eslint-disable-line
   useEffect(() => {
     if (account) setAddress(account);
   }, [account]);
