@@ -41,7 +41,7 @@ const TransactionCard: FC<TransactionCardProps> = ({ transaction }) => {
         p={'0 5px'}
       >
         <Icon name={'check'} size={'12px'} mr={'10px'} />
-        Passed
+        Success
       </Box>
     );
   }

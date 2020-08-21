@@ -41,9 +41,7 @@ module.exports = {
       options: rootImportOptions,
     },
 
-    // PWA Capabilities
-
-    /* PWA Capabilities */
+    //* PWA Capabilities
     'gatsby-plugin-offline',
     {
       resolve: 'gatsby-plugin-manifest',
@@ -56,6 +54,13 @@ module.exports = {
         display: 'standalone',
         icon: 'src/assets/images/POAP.png',
       },
+    },
+
+    // Analytics
+
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: { trackingId: process.env.TRACKING_ID },
     },
   ],
   siteMetadata: {

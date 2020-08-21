@@ -3,6 +3,7 @@ import Web3 from 'web3';
 import { utils, getDefaultProvider } from 'ethers';
 import { BaseProvider } from '@ethersproject/providers/lib';
 import { Box, Spinner } from '@chakra-ui/core';
+import { useToast } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract/types';
 
 // Hooks
@@ -39,6 +40,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   } = useStateContext();
   // Query hooks
   const { data: events } = useEvents();
+  const toast = useToast();
 
   const [poapsToClaim, setPoapsToClaim] = useState<PoapEvent[]>([]);
   const [provider, setProvider] = useState<BaseProvider | null>(null);
@@ -55,10 +57,26 @@ const Claim: FC<ClaimProps> = ({ event }) => {
 
   const [eventTransactions, setEventTransactions] = useState<Transaction[]>([]);
 
+  const checkNetwork = (net: string) => {
+    const appNetwork = (process.env.GATSBY_ETHEREUM_NETWORK || '').toLowerCase();
+    if (net.toLowerCase() !== appNetwork || (appNetwork === 'homestead' && net === 'main')) {
+      let network = appNetwork === 'homestead' ? 'Ethereum Main' : appNetwork;
+      toast({
+        title: 'Something is not right',
+        description: `Please connect to the ${network} Network.`,
+        status: 'error',
+        duration: null,
+        isClosable: false,
+      });
+    }
+  };
+
   const handleInputChange = (value: string) => {
     setAddress(value);
   };
   const handleSubmit = async () => {
+    if (address === '') return;
+
     let _address = '';
     setEns('');
     setValidatingAddress(true);
@@ -86,7 +104,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
     }
 
     // Check if is in event list
-    if (!(address.toLowerCase() in event.addresses)) {
+    if (!(_address.toLowerCase() in event.addresses)) {
       setError('Address not found in claim list');
       setValidatingAddress(false);
       return;
@@ -107,7 +125,7 @@ const Claim: FC<ClaimProps> = ({ event }) => {
 
     setValidatingAddress(false);
     setAddressValidated(true);
-    setAddressClaims(event.addresses[address.toLowerCase()]);
+    setAddressClaims(event.addresses[_address.toLowerCase()]);
     setClaimed(_claimed);
   };
 
@@ -138,26 +156,35 @@ const Claim: FC<ClaimProps> = ({ event }) => {
 
     setClaiming(true);
 
+    let gas = 1000000;
     try {
-      airdropContract.methods
+      gas = await airdropContract.methods
         .claim(index, address, addressClaims, proofs)
-        .send({
-          from: _account,
-        })
-        .on('transactionHash', (hash) => {
-          let tx: Transaction = {
-            key: event.key,
-            address: _account,
-            hash: hash,
-            status: 'pending',
-          };
-          saveTransaction(tx);
-        });
+        .estimateGas({ from: _account });
+      gas = Math.floor(gas * 1.3);
     } catch (e) {
-      console.log(e);
-      console.log('Error submitting transaction');
-      setClaiming(false);
+      console.log('Error calculating gas');
     }
+
+    airdropContract.methods
+      .claim(index, address, addressClaims, proofs)
+      .send({
+        from: _account,
+        gas,
+      })
+      .on('transactionHash', (hash) => {
+        let tx: Transaction = {
+          key: event.key,
+          address: _account,
+          hash: hash,
+          status: 'pending',
+        };
+        saveTransaction(tx);
+      })
+      .catch(() => {
+        console.log('Error submitting transaction');
+        setClaiming(false);
+      });
   };
 
   // Effects
@@ -214,6 +241,9 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   }, [events]); //eslint-disable-line
   useEffect(() => {
     if (web3) {
+      web3.eth.net.getNetworkType().then((network: string) => {
+        checkNetwork(network);
+      });
       try {
         const contract = new web3.eth.Contract(abi, event.contractAddress);
         setAirdropContract(contract);

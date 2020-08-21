@@ -19,22 +19,36 @@ import Toronto from 'assets/images/cities/toronto.png';
 // Styled component
 const Background = styled.img<{ theme: ITheme }>`
   position: absolute;
-  top: 0;
   z-index: -1;
   width: 100%;
+  opacity: 0.6;
+  top: 25%;
 
   @media (min-width: ${({ theme }) => theme.breakpoints['md']}) {
-    &.berlin {
+    top: 0;
+    opacity: 1;
+    &.berlin,
+    &.pittsburg,
+    &.buenos-aires,
+    &.rio,
+    &.shangai {
       top: -120px;
     }
-    &.gibraltar {
+    &.gibraltar,
+    &.san-fran,
+    &.toronto {
       top: -20px;
     }
-    &.london {
+    &.london,
+    &.sydney {
       top: -170px;
     }
-    &.pittsburg {
-      top: -120px;
+  }
+  @media (min-width: ${({ theme }) => theme.breakpoints['xxl']}) {
+    &.toronto,
+    &.buenos-aires,
+    &.san-fran {
+      top: -160px;
     }
   }
 `;
