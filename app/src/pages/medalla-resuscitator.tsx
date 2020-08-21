@@ -9,21 +9,19 @@ import events from 'lib/constants/events';
 // UI
 import MainLayout from 'ui/layouts/MainLayout';
 import Container from 'ui/components/Container';
-import YamHeaderPage from 'ui/components/YamHeaderPage';
+import ResuscitatorHeaderPage from 'ui/components/ResuscitatorHeaderPage';
 import Claim from 'ui/components/claim';
 
 const Yam = () => {
   return (
     <PageWrapper
-      title={'POAP ✈️ | 🍠 Yam Heroes'}
-      description={
-        'YAM, an experiment in fair farming, governance and elasticity, took Ethereum by storm and lived thrilling first 24 hours.'
-      }
+      title={'POAP ✈️ | 🚑️ Medalla Resuscitators'}
+      description={'An unexpected bug on the Medalla testnet kept the network at peril.'}
     >
       <MainLayout>
         <Container>
-          <YamHeaderPage event={events['yam']} />
-          <Claim event={events['yam']} />
+          <ResuscitatorHeaderPage event={events['resuscitator']} />
+          <Claim event={events['resuscitator']} />
         </Container>
       </MainLayout>
     </PageWrapper>

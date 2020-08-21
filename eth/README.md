@@ -24,9 +24,14 @@ npx buidler run scripts/deploy.js
 ```
 
 ## Deployed contracts ##
+
 ### YAM Heroes ###
  - Mainnet: [0x4ed27580F2B93A3EFD37F8Dcf7dbA28e117C362C](https://etherscan.io/address/0x4ed27580F2B93A3EFD37F8Dcf7dbA28e117C362C)
  - Ropsten: [0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC](https://ropsten.etherscan.io/address/0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC)
+
+### Medalla Resuscitators ###
+ - Mainnet: [TBD](https://etherscan.io/address/)
+ - Ropsten: [TBD](https://ropsten.etherscan.io/address/)
 
 
 ## Going live ##

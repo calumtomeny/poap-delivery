@@ -24,18 +24,15 @@ const YamHeaderPage: FC<YamHeaderPageProps> = ({ event }) => {
           lineHeight={'80px'}
           textAlign={'center'}
         >
-          🍠 YAM Heroes
+          🚑 Medalla Resuscitators
         </Heading>
         <Box mb={'10px'} as={'p'}>
-          <Link href={'https://yam.finance'} color={'primaryColor'} isExternal>
-            YAM
-          </Link>
-          , an experiment in fair farming, governance and elasticity, took Ethereum by storm and
-          lived thrilling first 24 hours.
+          An unexpected bug on the Medalla testnet kept the network at peril. Once again the
+          community participation was required sort this issue and finalize the network once again.
         </Box>
         <Box mb={'10px'} as={'p'}>
-          Crazy game theoretical dynamics created the cohort of $YAM Heroes, that are now awarded
-          this rare POAP to hold with pride.
+          Anyone who attested from the 75,000th to the 115,000th block is qualified to claim this
+          POAP.
         </Box>
         <Box mb={'10px'} as={'p'}>
           <Link href={event.githubLink} color={'primaryColor'} isExternal>
