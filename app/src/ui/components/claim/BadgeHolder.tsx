@@ -133,7 +133,9 @@ const BadgeHolder: FC<BadgeHolderProps> = ({
             mb={'20px'}
           >
             Congratulations! <br />
-            YAM Heroe badge is now in your wallet
+            {claims.length > 1
+              ? 'Your badges are now in your wallet'
+              : 'Your badge is now in your wallet'}
           </Heading>
           <Link href={endpoints.poap.wallet(address)} isExternal>
             <Button

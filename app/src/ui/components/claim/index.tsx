@@ -59,7 +59,8 @@ const Claim: FC<ClaimProps> = ({ event }) => {
 
   const checkNetwork = (net: string) => {
     const appNetwork = (process.env.GATSBY_ETHEREUM_NETWORK || '').toLowerCase();
-    if (net.toLowerCase() !== appNetwork || (appNetwork === 'homestead' && net === 'main')) {
+    if (appNetwork === 'homestead' && net === 'main') return;
+    if (net.toLowerCase() !== appNetwork) {
       let network = appNetwork === 'homestead' ? 'Ethereum Main' : appNetwork;
       toast({
         title: 'Something is not right',
