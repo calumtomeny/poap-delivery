@@ -3,6 +3,7 @@ import { Flex, Heading, Box, Button, Image, Link, Icon } from '@chakra-ui/core';
 
 // Helpers
 import { etherscanLinks } from 'lib/helpers/etherscan';
+import { endpoints } from 'lib/api';
 
 // Asset
 import whiteStar from 'assets/images/white-star.svg';
@@ -134,7 +135,7 @@ const BadgeHolder: FC<BadgeHolderProps> = ({
             Congratulations! <br />
             YAM Heroe badge is now in your wallet
           </Heading>
-          <Link href={`${process.env.GATSBY_POAP_APP}/scan/${address}`} isExternal>
+          <Link href={endpoints.poap.wallet(address)} isExternal>
             <Button
               bg={'tertiaryColor'}
               color={'white'}

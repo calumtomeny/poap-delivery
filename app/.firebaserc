@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "dev-poap-delivery",
+    "production": "prod-poap-delivery"
+  }
+}

@@ -11,6 +11,7 @@ export const endpoints = {
     events: `${process.env.GATSBY_API_POAP}/events`,
     scan: (address: string) => `${process.env.GATSBY_API_POAP}/actions/scan/${address}`,
     token: (token: number) => `${process.env.GATSBY_POAP_APP}/token/${token}`,
+    wallet: (address: string) => `${process.env.GATSBY_POAP_APP}/scan/${address}`,
   },
 };
 

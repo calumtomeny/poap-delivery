@@ -177,7 +177,6 @@ const Claim: FC<ClaimProps> = ({ event }) => {
   }, []); //eslint-disable-line
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('Running interval');
       const _web3 = web3 || new Web3(Web3.givenProvider || process.env.GATSY_DEFAULT_PROVIDER);
       if (transactions) {
         transactions
