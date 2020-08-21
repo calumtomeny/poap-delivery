@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Box, Flex, Heading, Link } from '@chakra-ui/core';
 
-const YamHeaderPage = () => {
+// Types
+import { AirdropEventData } from 'lib/types';
+type YamHeaderPageProps = {
+  event: AirdropEventData;
+};
+
+const YamHeaderPage: FC<YamHeaderPageProps> = ({ event }) => {
   return (
     <Flex
       p={['50px 45px', '50px 45px', '50px 45px', '50px 100px']}
@@ -31,7 +37,7 @@ const YamHeaderPage = () => {
           This POAP is for all voters that worked to save the protocol regarding the abrupt finale.
         </Box>
         <Box mb={'10px'} as={'p'}>
-          <Link href={'https://github.com/poapxyz'} color={'primaryColor'}>
+          <Link href={event.githubLink} color={'primaryColor'} isExternal>
             View elegible addresses
           </Link>
         </Box>

@@ -83,7 +83,7 @@ const Hero: FC = () => {
           fontWeight={'bold'}
           m={'0 0 0.5em'}
         >
-          POAP Airdrop
+          POAP Delivery
         </Box>
       </Box>
       <Background

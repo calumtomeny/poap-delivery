@@ -5,9 +5,6 @@ import { BaseProvider } from '@ethersproject/providers/lib';
 import { Box, Spinner } from '@chakra-ui/core';
 import { Contract } from 'web3-eth-contract/types';
 
-// Types
-import { AirdropEventData } from 'lib/types';
-
 // Hooks
 import { useEvents } from 'lib/hooks/useEvents';
 import { useStateContext } from 'lib/hooks/useCustomState';
@@ -26,7 +23,7 @@ import abi from 'lib/abi/poapAirdrop.json';
 import MerkleTree from 'lib/helpers/merkleTree';
 
 // Types
-import { Transaction, PoapEvent } from 'lib/types';
+import { AirdropEventData, Transaction, PoapEvent } from 'lib/types';
 type ClaimProps = {
   event: AirdropEventData;
 };
@@ -178,6 +175,36 @@ const Claim: FC<ClaimProps> = ({ event }) => {
       }
     }
   }, []); //eslint-disable-line
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Running interval');
+      const _web3 = web3 || new Web3(Web3.givenProvider || process.env.GATSY_DEFAULT_PROVIDER);
+      if (transactions) {
+        transactions
+          .filter((tx) => tx.status === 'pending')
+          .forEach(async (tx) => {
+            let receipt = await _web3.eth.getTransactionReceipt(tx.hash);
+            if (receipt) {
+              let newTx: Transaction = { ...tx, status: 'passed' };
+              if (!receipt.status) {
+                newTx = { ...tx, status: 'failed' };
+                setClaiming(false);
+              }
+              saveTransaction(newTx);
+            }
+          });
+      }
+      if (airdropContract && addressValidated && !claimed) {
+        airdropContract.methods
+          .claimed(address)
+          .call()
+          .then((claimed) => {
+            if (claimed) setClaimed(true);
+          });
+      }
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [transactions]); //eslint-disable-line
   useEffect(() => {
     if (account && address === '') setAddress(account);
   }, [account]); //eslint-disable-line

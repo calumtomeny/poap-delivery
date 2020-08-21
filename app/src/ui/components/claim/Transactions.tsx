@@ -29,7 +29,7 @@ const Transactions: FC<TransactionsProps> = ({ transactions }) => {
       </Box>
       <Box>
         {transactions.map((tx) => {
-          return <TransactionCard transaction={tx} />;
+          return <TransactionCard key={tx.hash} transaction={tx} />;
         })}
       </Box>
     </Box>

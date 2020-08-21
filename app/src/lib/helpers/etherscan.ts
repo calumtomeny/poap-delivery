@@ -1,4 +1,7 @@
-const ETHERSCAN_URL = 'https://etherscan.io';
+const ETHERSCAN_URL =
+  process.env.GATSBY_ETHEREUM_NETWORK === 'homestead'
+    ? 'https://etherscan.io'
+    : `https://${process.env.GATSBY_ETHEREUM_NETWORK}.etherscan.io`;
 const POAP_CONTRACT = process.env.GATSBY_POAP_CONTRACT;
 
 export const etherscanLinks = {

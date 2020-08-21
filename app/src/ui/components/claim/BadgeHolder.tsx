@@ -134,7 +134,7 @@ const BadgeHolder: FC<BadgeHolderProps> = ({
             Congratulations! <br />
             YAM Heroe badge is now in your wallet
           </Heading>
-          <Link href={'https://app.poap.xyz'} isExternal>
+          <Link href={`${process.env.GATSBY_POAP_APP}/scan/${address}`} isExternal>
             <Button
               bg={'tertiaryColor'}
               color={'white'}

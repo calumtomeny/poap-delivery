@@ -22,7 +22,7 @@ const Yam = () => {
     >
       <MainLayout>
         <Container>
-          <YamHeaderPage />
+          <YamHeaderPage event={events['yam']} />
           <Claim event={events['yam']} />
         </Container>
       </MainLayout>

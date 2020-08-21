@@ -48,8 +48,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'POAP Airdrop',
-        short_name: 'POAP Airdrop',
+        name: 'POAP Delivery',
+        short_name: 'POAP Delivery',
         start_url: '/',
         background_color: '#fff',
         theme_color: '#6534ff',
@@ -60,8 +60,8 @@ module.exports = {
   ],
   siteMetadata: {
     author: 'POAP',
-    title: 'POAP - Airdrop ✈️',
-    description: 'POAP Airdrop, a place where awesome events are recognized',
-    siteUrl: 'https://airdrop.xivis.com'
+    title: 'POAP - Delivery ✈️',
+    description: 'POAP Delivery, a place where awesome events are recognized',
+    siteUrl: process.env.SITE_URL,
   },
 };

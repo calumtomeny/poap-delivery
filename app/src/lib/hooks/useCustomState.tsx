@@ -101,11 +101,14 @@ const useCustomState = () => {
 
   const saveTransaction = (tx: Transaction) => {
     let _transactions = safeGetItem('transactions', '[]');
+
     if (_transactions.filter((each) => each.hash === tx.hash).length === 0) {
       _transactions.push(tx);
-      localStorage.setItem('transactions', JSON.stringify(_transactions));
-      setTransactions(_transactions);
+    } else {
+      _transactions = [..._transactions.filter((each) => each.hash !== tx.hash), tx];
     }
+    localStorage.setItem('transactions', JSON.stringify(_transactions));
+    setTransactions(_transactions);
   };
 
   return {

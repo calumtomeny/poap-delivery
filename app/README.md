@@ -1,4 +1,4 @@
-# 🎖 POAP Medalla Chain Validators Airdrop - Frontend 🎖
+# 🎖 POAP Delivery - Frontend 🎖
 
 ## Setup ##
 This project uses [Gatsby](https://www.gatsbyjs.com/) an open source framework for creating websites and apps.

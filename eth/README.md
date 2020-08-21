@@ -1,4 +1,4 @@
-# 🎖 POAP Medalla Chain Validators Airdrop - Smart contract 🎖
+# 🎖 POAP Delivery Airdrop - Smart contract 🎖
 
 ## Setup ##
 This project uses [buidler](https://buidler.dev) to compile, test and deploy the contracts.
