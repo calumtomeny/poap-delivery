@@ -7,7 +7,7 @@ import Card from 'ui/components/Card';
 const Welcome: FC = () => {
   const theme = useTheme();
   return (
-    <Box m={'0 auto'} maxW={['90%', '90%', '600px']} p={'50px 0'}>
+    <Box m={'0 auto'} maxW={['90%', '90%', '650px']} p={'50px 0'}>
       <Card>
         <Box
           fontSize={theme.fontSizes['md']}
@@ -17,7 +17,7 @@ const Welcome: FC = () => {
           p={'30px'}
         >
           <Box fontSize={theme.fontSizes['xl']} fontWeight={'bold'}>
-            Some events are worth remembering and honouring
+            Get your POAP to remember that historic event you've been part of.
           </Box>
           <p>
             The airdrop based on Merkle trees allow us to honor the participants of those events

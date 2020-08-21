@@ -30,8 +30,8 @@ npx buidler run scripts/deploy.js
  - Ropsten: [0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC](https://ropsten.etherscan.io/address/0xf93abE4adf2A346f1E9aC9F508e7389279b64bBC)
 
 ### Medalla Resuscitators ###
- - Mainnet: [TBD](https://etherscan.io/address/)
- - Ropsten: [TBD](https://ropsten.etherscan.io/address/)
+ - Mainnet: [0x46d1ab853c72a355ba36616c5160ae82dca1ee4b](https://etherscan.io/address/0x46d1ab853c72a355ba36616c5160ae82dca1ee4b)
+ - Ropsten: [0x8054f929e637767a3cf2Fc35B59688d9599D9C86](https://ropsten.etherscan.io/address/0x8054f929e637767a3cf2Fc35B59688d9599D9C86)
 
 
 ## Going live ##

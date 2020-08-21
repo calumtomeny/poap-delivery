@@ -61,7 +61,7 @@ module.exports = {
   siteMetadata: {
     author: 'POAP',
     title: 'POAP - Delivery ✈️',
-    description: 'POAP Delivery, a place where awesome events are recognized',
+    description: 'POAP.delivery the place where events earn their place in history',
     siteUrl: process.env.SITE_URL,
   },
 };

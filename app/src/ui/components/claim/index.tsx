@@ -145,7 +145,6 @@ const Claim: FC<ClaimProps> = ({ event }) => {
           from: _account,
         })
         .on('transactionHash', (hash) => {
-          console.log(hash);
           let tx: Transaction = {
             key: event.key,
             address: _account,
