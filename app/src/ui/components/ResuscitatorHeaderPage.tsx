@@ -28,7 +28,7 @@ const YamHeaderPage: FC<YamHeaderPageProps> = ({ event }) => {
         </Heading>
         <Box mb={'10px'} as={'p'}>
           An unexpected bug on the Medalla testnet kept the network at peril. Once again the
-          community participation was required sort this issue and finalize the network once again.
+          community participation was required to sort this issue and finalize the network once again.
         </Box>
         <Box mb={'10px'} as={'p'}>
           Anyone who attested from the 75,000th to the 115,000th block is qualified to claim this
