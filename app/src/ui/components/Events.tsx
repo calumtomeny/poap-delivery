@@ -48,7 +48,7 @@ const Events: FC = () => {
           <Box>
             <Box mb={'10px'} as={'p'}>
               An unexpected bug on the Medalla testnet kept the network at peril. Once again the
-              community participation was required sort this issue and finalize the network once
+              community participation was required to sort this issue and finalize the network once
               again.
             </Box>
             <Box mb={'10px'} as={'p'}>
